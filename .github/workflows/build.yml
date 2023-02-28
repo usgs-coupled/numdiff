@@ -43,4 +43,4 @@ jobs:
         mkdir _build
         cd _build
         ../configure
-        ../make -j2
+        make -j2
