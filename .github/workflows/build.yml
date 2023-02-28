@@ -27,7 +27,15 @@ jobs:
     - name: '🧰 Checkout'
       uses: actions/checkout@v3
 
+    - name: Cache numdiff
+      id: cache-numdiff
+      uses: actions/cache@v3
+      with:
+        path: ${{ runner.workspace }}/${{ matrix.sys }}
+        key: ${{ runner.workspace }}-${{ matrix.sys }}
+
     - name: '${{ matrix.icon }} Setup MSYS2'
+      if: steps.cache-numdiff.outputs.cache-hit != 'true'
       uses: msys2/setup-msys2@v2
       with:
         msystem: ${{ matrix.sys }}
@@ -43,16 +51,17 @@ jobs:
           toolchain:p
 
     - name: '🚧 Build numdiff'
+      if: steps.cache-numdiff.outputs.cache-hit != 'true'
       run: |
         mkdir _build
         cd _build
-        ../configure --prefix $(pwd)/INSTALL
+        ../configure --prefix $(cygpath ${{ runner.workspace }}/${{ matrix.sys }})
         make -j2
         make install
-        ldd INSTALL/bin/numdiff.exe
+        ldd $(cygpath ${{ runner.workspace }}/${{ matrix.sys }}/bin/numdiff.exe)
 
     - name: 'Upload artifact'
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.sys }}-artifact
-        path: ${{ github.workspace }}/_build/INSTALL
+        path: ${{ runner.workspace }}/${{ matrix.sys }}
