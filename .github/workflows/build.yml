@@ -34,6 +34,7 @@ jobs:
         update: true
         install: >-
           make
+          texinfo
         pacboy: >-
           texlive-bin:p
           texlive-core:p
@@ -41,7 +42,7 @@ jobs:
           texlive-fonts-recommended:p
           toolchain:p
 
-    - name: '🚧 Build TOOL'
+    - name: '🚧 Build numdiff'
       run: |
         mkdir _build
         cd _build
