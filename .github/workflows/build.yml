@@ -57,6 +57,7 @@ jobs:
         which gcc
         which makeinfo
         which texi2pdf
+        pacman -Fy
         pacman -F makeinfo
         pacman -F texi2pdf
 
