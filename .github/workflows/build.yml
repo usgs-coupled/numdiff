@@ -42,7 +42,8 @@ jobs:
         update: true
         install: >-
           make
-          texinfo
+          texinfo                      # makeinfo
+          texinfo-tex                  # texi2pdf
         pacboy: >-
           texlive-bin:p
           texlive-core:p
@@ -56,6 +57,8 @@ jobs:
         which gcc
         which makeinfo
         which texi2pdf
+        pacman -F makeinfo
+        pacman -F texi2pdf
 
     - name: '🚧 Build numdiff'
       if: steps.cache-numdiff.outputs.cache-hit != 'true'
