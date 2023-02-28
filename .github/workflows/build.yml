@@ -42,8 +42,8 @@ jobs:
         update: true
         install: >-
           make
-          texinfo                      # makeinfo
-          texinfo-tex                  # texi2pdf
+          texinfo
+          texinfo-tex
         pacboy: >-
           texlive-bin:p
           texlive-core:p
