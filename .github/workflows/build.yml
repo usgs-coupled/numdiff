@@ -4,6 +4,8 @@ name: build
 on:
   push:
   pull_request:
+  schedule:
+    - cron: '1 2 2/7 * *'
   workflow_dispatch:
 
 jobs:
@@ -14,7 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { icon: '⬛', sys: mingw32 }
+          - { icon: '🟠', sys: clang32 }
+          - { icon: '⚫', sys: mingw32 }
           # - { icon: '🟦', sys: mingw64 }
           # - { icon: '🟨', sys: ucrt64  }
           # - { icon: '🟧', sys: clang64 }
@@ -55,6 +58,7 @@ jobs:
       if: steps.cache-numdiff.outputs.cache-hit != 'true'
       run: |
         which gcc
+        which make
         which makeinfo
         which texi2pdf
         pacman -Fy
