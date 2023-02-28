@@ -55,10 +55,10 @@ jobs:
       run: |
         mkdir _build
         cd _build
-        ../configure --prefix $(cygpath ${{ runner.workspace }}/${{ matrix.sys }})
+        ../configure --prefix $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}")
         make -j2
         make install
-        ldd $(cygpath ${{ runner.workspace }}/${{ matrix.sys }}/bin/numdiff.exe)
+        ldd $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}/bin/numdiff.exe")
 
     - name: 'Upload artifact'
       uses: actions/upload-artifact@v3
