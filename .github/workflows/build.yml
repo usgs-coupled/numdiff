@@ -15,9 +15,9 @@ jobs:
       matrix:
         include:
           - { icon: '⬛', sys: mingw32 }
-          - { icon: '🟦', sys: mingw64 }
-          - { icon: '🟨', sys: ucrt64  }
-          - { icon: '🟧', sys: clang64 }
+          # - { icon: '🟦', sys: mingw64 }
+          # - { icon: '🟨', sys: ucrt64  }
+          # - { icon: '🟧', sys: clang64 }
     name: 🚧${{ matrix.icon }} ${{ matrix.sys }}
     defaults:
       run:
@@ -30,17 +30,28 @@ jobs:
     - name: '${{ matrix.icon }} Setup MSYS2'
       uses: msys2/setup-msys2@v2
       with:
-        msystem: ${{matrix.sys}}
+        msystem: ${{ matrix.sys }}
         update: true
         install: >-
           make
         pacboy: >-
+          texlive-bin:p
+          texlive-core:p
+          texlive-plain-generic:p
+          texlive-fonts-recommended:p
           toolchain:p
-          ninja:p
 
     - name: '🚧 Build TOOL'
       run: |
         mkdir _build
         cd _build
-        ../configure
+        ../configure --prefix $(pwd)/INSTALL
         make -j2
+        make install
+        ldd INSTALL/bin/numdiff.exe
+
+    - name: 'Upload artifact'
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.sys }}-artifact
+        path: ${{ github.workspace }}/_build/INSTALL
