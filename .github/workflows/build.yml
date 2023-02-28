@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { icon: '🟠', sys: clang32 }
+          # - { icon: '🟠', sys: clang32 }
           - { icon: '⚫', sys: mingw32 }
           # - { icon: '🟦', sys: mingw64 }
           # - { icon: '🟨', sys: ucrt64  }
@@ -70,7 +70,7 @@ jobs:
       run: |
         mkdir _build
         cd _build
-        ../configure --prefix $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}")
+        ../configure --prefix $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}/${{ matrix.sys }}")
         make -j2
         make install
         cp $(which libgmp-10.dll)  $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}")/bin/.
