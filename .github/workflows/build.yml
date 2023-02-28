@@ -1,0 +1,46 @@
+# Modified from https://github.com/msys2/setup-msys2/blob/main/examples/cmake.yml
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { icon: '⬛', sys: mingw32 }
+          - { icon: '🟦', sys: mingw64 }
+          - { icon: '🟨', sys: ucrt64  }
+          - { icon: '🟧', sys: clang64 }
+    name: 🚧${{ matrix.icon }} ${{ matrix.sys }}
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v3
+
+    - name: '${{ matrix.icon }} Setup MSYS2'
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{matrix.sys}}
+        update: true
+        install: >-
+          make
+        pacboy: >-
+          toolchain:p
+          ninja:p
+
+    - name: '🚧 Build TOOL'
+      run: |
+        mkdir _build
+        cd _build
+        ../configure
+        ../make -j2
