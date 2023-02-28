@@ -50,6 +50,13 @@ jobs:
           texlive-fonts-recommended:p
           toolchain:p
 
+    - name: 'Test Setup'
+      if: steps.cache-numdiff.outputs.cache-hit != 'true'
+      run: |
+        which gcc
+        which makeinfo
+        which texi2pdf
+
     - name: '🚧 Build numdiff'
       if: steps.cache-numdiff.outputs.cache-hit != 'true'
       run: |
