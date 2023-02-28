@@ -58,7 +58,9 @@ jobs:
         ../configure --prefix $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}")
         make -j2
         make install
-        ldd $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}/bin/numdiff.exe")
+        cp $(which libgmp-10.dll)  $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}")/bin/.
+        cp $(which libiconv-2.dll) $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}")/bin/.
+        cp $(which libintl-8.dll)  $(cygpath "${{ runner.workspace }}/${{ matrix.sys }}")/bin/.
 
     - name: 'Upload artifact'
       uses: actions/upload-artifact@v3
