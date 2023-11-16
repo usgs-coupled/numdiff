@@ -47,12 +47,12 @@ jobs:
           make
           texinfo
           texinfo-tex
-        pacboy: >-
-          texlive-bin:p
-          texlive-core:p
-          texlive-plain-generic:p
-          texlive-fonts-recommended:p
-          toolchain:p
+        # pacboy: >-
+        #   texlive-bin:p
+        #   texlive-core:p
+        #   texlive-plain-generic:p
+        #   texlive-fonts-recommended:p
+        #   toolchain:p
 
     - name: 'Test Setup'
       if: steps.cache-numdiff.outputs.cache-hit != 'true'
