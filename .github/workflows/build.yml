@@ -35,7 +35,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ${{ runner.workspace }}/${{ matrix.sys }}
-        key: ${{ runner.workspace }}-${{ matrix.sys }}-static
+        key: ${{ runner.workspace }}-${{ matrix.sys }}
 
     - name: '${{ matrix.icon }} Setup MSYS2'
       if: steps.cache-numdiff.outputs.cache-hit != 'true'
