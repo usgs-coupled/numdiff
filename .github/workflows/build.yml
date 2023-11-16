@@ -44,6 +44,7 @@ jobs:
         msystem: ${{ matrix.sys }}
         update: true
         install: >-
+          gcc
           make
           texinfo
           texinfo-tex
