@@ -48,6 +48,7 @@ jobs:
           make
           texinfo
           texinfo-tex
+          texlive
         # pacboy: >-
         #   texlive-bin:p
         #   texlive-core:p
