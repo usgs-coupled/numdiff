@@ -46,9 +46,9 @@ jobs:
         install: >-
           gcc
           make
-          texinfo
-          texinfo-tex
-          texlive
+          texlive-core
+          texlive-latex
+          texlive-latexextra
         # pacboy: >-
         #   texlive-bin:p
         #   texlive-core:p
