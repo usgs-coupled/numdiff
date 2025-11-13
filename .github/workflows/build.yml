@@ -47,9 +47,6 @@ jobs:
           gcc
           make
           mingw-w64-x86_64-texlive-core
-          mingw-w64-x86_64-texlive-latex
-          mingw-w64-x86_64-texlive-latexextra
-          mingw-w64-x86_64-texlive-fontsrecommended
         # pacboy: >-
         #   texlive-bin:p
         #   texlive-core:p
