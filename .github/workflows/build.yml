@@ -63,7 +63,7 @@ jobs:
         which make
         which makeinfo
         which texi2pdf
-        pacman -Qo /usr/bin/texi2pdf.exe
+        pacman -Qo /usr/bin/texi2pdf*
         pacman -Fy
         pacman -F makeinfo
         pacman -F texi2pdf
