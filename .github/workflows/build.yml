@@ -30,15 +30,15 @@ jobs:
     - name: '🧰 Checkout'
       uses: actions/checkout@v3
 
-    - name: Cache numdiff
-      id: cache-numdiff
-      uses: actions/cache@v4
-      with:
-        path: ${{ runner.workspace }}/${{ matrix.sys }}
-        key: ${{ runner.workspace }}-${{ matrix.sys }}
+    # - name: Cache numdiff
+    #   id: cache-numdiff
+    #   uses: actions/cache@v4
+    #   with:
+    #     path: ${{ runner.workspace }}/${{ matrix.sys }}
+    #     key: ${{ runner.workspace }}-${{ matrix.sys }}
 
     - name: '${{ matrix.icon }} Setup MSYS2'
-      if: steps.cache-numdiff.outputs.cache-hit != 'true'
+      # if: steps.cache-numdiff.outputs.cache-hit != 'true'
       uses: msys2/setup-msys2@v2
       with:
         msystem: ${{ matrix.sys }}
@@ -57,7 +57,7 @@ jobs:
         #   toolchain:p
 
     - name: 'Test Setup'
-      if: steps.cache-numdiff.outputs.cache-hit != 'true'
+      # if: steps.cache-numdiff.outputs.cache-hit != 'true'
       run: |
         which gcc
         which make
@@ -75,7 +75,7 @@ jobs:
         echo '-------------------------------------------------'
 
     - name: '🚧 Build numdiff'
-      if: steps.cache-numdiff.outputs.cache-hit != 'true'
+      # if: steps.cache-numdiff.outputs.cache-hit != 'true'
       run: |
         mkdir _build
         cd _build
