@@ -71,6 +71,9 @@ jobs:
         make --version
         makeinfo --version
         texi2pdf --version
+        echo ' -------------------------------------------------'
+        pacman -Q
+        echo ' -------------------------------------------------'
 
     - name: '🚧 Build numdiff'
       # if: steps.cache-numdiff.outputs.cache-hit != 'true'
